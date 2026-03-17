@@ -1,0 +1,44 @@
+# 🤖 Project: Agentic Coding Documentation RAG
+
+## 📌 סקירה כללית
+פרויקט זה מיישם מערכת **RAG (Retrieval-Augmented Generation)** מתקדמת הסורקת ומתחקרת קבצי תיעוד (`.md`) הנוצרים על ידי כלי Agentic Coding (כמו Cursor, Claude Code וכו'). המערכת מאפשרת למתכנתים לקבל תובנות מהירות על החלטות טכניות, חוקי ממשק ומגבלות מערכת מבלי לעבור ידנית על עשרות קבצים.
+
+## 🎯 מטרות הפרויקט
+* **איחוד ידע:** איסוף מידע מבוזר מכלי קידוד שונים לשכבת ידע אחת.
+* **ארכיטקטורת Event-Driven:** שימוש ב-Workflows מבוססי אירועים לניהול זרימת המידע.
+* **שילוב נתונים מובנים:** חילוץ החלטות וחוקים לפורמט JSON לדיוק מקסימלי.
+
+## 🛠️ טכנולוגיות בשימוש
+* **Framework:** [LlamaIndex](https://www.llamaindex.ai/) (Workflows, Structured Extraction)
+* **LLM & Embeddings:** [Cohere](https://cohere.com/) (Command-R Plus, Multilingual-v3)
+* **Vector DB:** [Pinecone](https://www.pinecone.io/) (Cloud-based semantic search)
+* **UI:** [Gradio](https://www.gradio.app/)
+
+## 🧩 מבנה המערכת (Workflow)
+המערכת בנויה כ-Workflow מבוסס אירועים הכולל את השלבים הבאים:
+1. **StartEvent:** קבלת שאילתה מהמשתמש.
+2. **Validation Step:** בדיקת תקינות הקלט וסינון שאלות ריקות.
+3. **Retrieval Step:** שליפה סמנטית מ-Pinecone ובדיקת Confidence Score (מניעת "הזיות" AI).
+4. **Generation Step:** ניסוח תשובה סופית בהתבסס על ההקשר שנמצא.
+
+## 📂 מבנה קבצי הפרויקט
+* `rag_app.py`: טעינת הקבצים, יצירת Embeddings וסנכרון מול Pinecone.
+* `workflow_app.py`: יישום ה-Workflow וניהול ממשק הצ'אט (Gradio).
+* `extraction_app.py`: חילוץ נתונים מובנים (Decisions, Rules) לקובץ JSON.
+* `my-dummy-project/`: תיקיית המקור המכילה את קבצי התיעוד של כלי ה-AI.
+
+## 🚀 הוראות הרצה
+1. התקנת ספריות: `pip install llama-index llama-index-llms-cohere llama-index-embeddings-cohere pinecone-client gradio`
+2. עדכון מפתחות API בקבצי הקוד (Cohere & Pinecone).
+3. אינדוקס הנתונים: `python rag_app.py`
+4. הרצת הצ'אט: `python workflow_app.py`
+
+## 💡 דוגמאות לשאלות שהמערכת יודעת לענות עליהן
+* "באיזה מסד נתונים הוחלט להשתמש?"
+* "מהן הנחיות ה-UI לגבי ממשק בעברית (RTL)?"
+* "האם קיימת הנחיה לגבי שימוש ב-JWT?"
+* "תן לי רשימה של כל ההחלטות הטכניות שהתקבלו." (באמצעות רכיב ה-Extraction)
+
+---
+**מגישה:** אלישבע פריצקי
+**קורס:** AI Agents - שיעור 3
